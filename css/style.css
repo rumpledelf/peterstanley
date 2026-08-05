@@ -105,7 +105,19 @@ img {
 
 @media (max-width: 768px) {
   .banner-wrapper {
-    height: 180px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner-img {
+    width: auto;
+    min-width: 1200px;
+    height: 400px;
+    max-width: none;
+    position: absolute;
+    right: -110px;
+    top: -150px;
+    object-fit: cover;
   }
 }
 
@@ -346,6 +358,7 @@ img {
   font-family: var(--font-heading);
   font-size: 2.2rem;
   color: var(--color-primary);
+  line-height: 1.2;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
@@ -391,16 +404,82 @@ img {
   box-shadow: var(--shadow-md);
 }
 
-.book-card { gap: 1rem; }
+/* Books Grid Layout - 2 Columns */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
 
-.book-cover {
-  display: block;
-  width: 100%;
-  height: 290px;
-  object-fit: contain;
-  object-position: center;
-  background: #eee8dc;
+@media (max-width: 900px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Horizontal Book Card Layout */
+.book-card-horizontal {
+  background-color: var(--color-card-bg);
   border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: stretch;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book-card-horizontal:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.book-cover-left {
+  width: 125px;
+  min-width: 125px;
+  height: 185px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(35, 32, 28, 0.15);
+  border: 1px solid var(--color-card-border);
+  background-color: #EFE9DD;
+  display: block;
+}
+
+.book-details-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .book-card-horizontal {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem;
+  }
+  
+  .book-cover-left {
+    width: 140px;
+    min-width: 140px;
+    height: 200px;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-details-right {
+    width: 100%;
+    text-align: left;
+  }
+
+  .book-details-right .btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
 
 .card-icon {
@@ -455,15 +534,27 @@ img {
   color: #FFFFFF;
 }
 
+.publisher-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
 .btn-outline {
-  background-color: transparent;
-  color: var(--color-primary);
-  border: 1.5px solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary);
 }
 
 .btn-outline:hover {
-  background-color: var(--color-primary);
+  background-color: #3C4E3F;
   color: #FFFFFF;
+  border-color: #3C4E3F;
 }
 
 /* Honors / Awards Table */
@@ -519,28 +610,63 @@ img {
 }
 
 @media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .site-title {
+    font-size: 1.35rem;
+    line-height: 1.2;
   }
-  
-  .main-nav {
-    display: none;
+
+  .site-title span {
+    font-size: 0.7rem;
+    margin-top: 2px;
   }
-  
-  .main-nav.open {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-  }
-  
-  .main-nav.open ul {
-    flex-direction: column;
-    gap: 0.75rem;
+
+  .brand-nav-container {
+    position: relative;
   }
   
   .nav-toggle {
     display: block;
+    padding: 0.35rem 0.65rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1E281F;
+    padding: 1.25rem 1.5rem;
+    border-top: 3px solid var(--color-accent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  }
+  
+  .main-nav.open {
+    display: block;
+  }
+  
+  .main-nav.open ul {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .main-nav a {
+    display: block;
+    font-size: 1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
   .hero-stats {
