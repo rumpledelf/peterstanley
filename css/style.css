@@ -248,20 +248,15 @@ img {
   text-align: center;
 }
 
-.profile-avatar-placeholder {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background-color: var(--color-accent-light);
-  border: 3px solid var(--color-accent);
+.profile-photo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 320px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-card-border);
   margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  color: var(--color-primary);
-  font-weight: 700;
 }
 
 .profile-name {
@@ -437,9 +432,11 @@ img {
 }
 
 .book-cover-left {
-  width: 125px;
-  min-width: 125px;
-  height: 185px;
+  width: auto;
+  min-width: 0;
+  max-width: 125px;
+  height: auto;
+  max-height: 185px;
   object-fit: cover;
   border-radius: var(--radius-sm);
   box-shadow: 0 4px 12px rgba(35, 32, 28, 0.15);
@@ -464,9 +461,11 @@ img {
   }
   
   .book-cover-left {
-    width: 140px;
-    min-width: 140px;
-    height: 200px;
+    width: auto;
+    min-width: 0;
+    max-width: 140px;
+    height: auto;
+    max-height: 200px;
     margin-bottom: 0.5rem;
   }
 
